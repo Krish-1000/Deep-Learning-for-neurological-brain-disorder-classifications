@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ predict | upper }} Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #49458a;
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            width: 20%;
+            height: 20%;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .list-disc {
+            margin-left: 20px;
+        }
+
+        .list-disc li {
+            margin-bottom: 10px;
+        }
+        .card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body h2 {
+    color: #333;
+}
+
+.card-body h3 {
+    color: #007bff;
+    margin-top: 20px;
+}
+
+.card-body ul {
+    list-style-type: disc;
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.card-body ul li {
+    margin-bottom: 10px;
+}
+
+.card-body .prevention ul li {
+    margin-bottom: 15px;
+}
+
+    </style>
+</head>
+
+<body>
+  <nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-white text-lg font-bold">Brain Stage Detection</a>
+        <ul class="flex space-x-4">
+            <li><a href="/" class="text-gray-300 hover:text-white">Home</a></li>
+            <li><a href="{% url 'Deploy_8' %}" class="text-gray-300 hover:text-white">Model</a></li>
+            <li><a href="{% url 'Database' %}" class="text-gray-300 hover:text-white">Database</a></li>
+            <li><a href="{% url 'users-profile' %}" class="text-gray-300 hover:text-white">profile_Database</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="card">
+        <div class="card-content text-center">
+            <h1 class="text-3xl font-bold mb-4">{{ predict | upper }}</h1>
+            <img src="{{ obj.image.url }}" alt="Input Images" class="mb-4 mx-auto">
+            <p class="card-title">{{ predict | upper }}</p>
+        </div>
+    </div>
+
+    {% if obj %}
+    {% if predict == 'No_Impairment' %}
+    <div class="card">
+        <div class="card-header">
+            <h2>This is Normal Conditions of Brain</h2>
+        </div>
+        <div class="card-body">
+            <p>No specific treatment is required for a normal brain.</p>
+            <h3>Prevention</h3>
+            <div class="prevention">
+                <h4>Healthy Lifestyle Choices:</h4>
+                <ul>
+                    <li><strong>Diet:</strong> Consume a balanced diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats. Omega-3 fatty acids, found in fish, flaxseed, and walnuts, are particularly beneficial for brain health.</li>
+                    <li><strong>Exercise:</strong> Engage in regular physical activity. Aim for at least 150 minutes of moderate aerobic exercise or 75 minutes of vigorous exercise per week. Activities like walking, swimming, and cycling are excellent choices.</li>
+                    <li><strong>Sleep:</strong> Ensure adequate sleep, typically 7-9 hours per night for adults. Good sleep hygiene includes maintaining a regular sleep schedule and creating a restful environment.</li>
+                </ul>
+                <h4>Mental Stimulation:</h4>
+                <ul>
+                    <li><strong>Cognitive Activities:</strong> Engage in activities that challenge the brain, such as puzzles, reading, learning new skills, and playing musical instruments.</li>
+                    <li><strong>Social Interaction:</strong> Maintain social connections and engage in regular social activities to keep the brain active and engaged.</li>
+                </ul>
+                <h4>Stress Management:</h4>
+                <ul>
+                    <li><strong>Relaxation Techniques:</strong> Practice stress-relief techniques such as meditation, yoga, deep breathing exercises, and mindfulness.</li>
+                    <li><strong>Healthy Coping Strategies:</strong> Develop healthy ways to manage stress, such as talking to a friend, engaging in hobbies, or seeking professional help when needed.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% elif predict == 'Mild_Impairment' %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Mild Cognitive Impairment (MCI)</h2>
+        </div>
+        <div class="card-body">
+            <p>MCI involves problems with memory, language, thinking, or judgment that are greater than normal age-related changes but do not interfere significantly with daily life.</p>
+            <h3>Symptoms</h3>
+            <ul>
+                <li>Memory loss</li>
+                <li>Difficulty with language</li>
+                <li>Problems with attention</li>
+                <li>Challenges with decision making</li>
+                <li>Difficulty with complex tasks</li>
+                <li>Disorientation</li>
+            </ul>
+            <h3>Causes</h3>
+            <ul>
+                <li>Age-related changes</li>
+                <li>Genetics</li>
+                <li>Medical conditions like neurological disorders and cardiovascular issues</li>
+                <li>Lifestyle factors such as poor diet and lack of exercise</li>
+                <li>Chronic stress</li>
+            </ul>
+            <h3>Treatment, Prevention, Precaution</h3>
+            <ul>
+                <li>Manage chronic conditions like diabetes and hypertension</li>
+                <li>Regular physical activity</li>
+                <li>Mental stimulation through puzzles, reading, and learning new skills</li>
+                <li>Social engagement and maintaining relationships</li>
+                <li>Healthy diet rich in fruits, vegetables, whole grains, and lean proteins</li>
+                <li>Adequate sleep of 7-8 hours per night</li>
+                <li>Limit alcohol consumption and quit smoking</li>
+                <li>Avoid head injuries by wearing helmets and using seat belts</li>
+            </ul>
+            <h3>Physical Activities</h3>
+            <ul>
+                <li>Physical therapy exercises to strengthen muscles</li>
+                <li>Swimming to improve overall muscle tone</li>
+                <li>Yoga and Pilates for improving flexibility and core strength</li>
+                <li>Low-impact aerobics to enhance cardiovascular health</li>
+            </ul>
+            <h3>Dietary Recommendations</h3>
+            <ul>
+                <li>Calcium and vitamin D-rich foods to support bone health</li>
+                <li>Anti-inflammatory foods such as fish, nuts, and leafy greens</li>
+                <li>Whole grains, lean proteins, and plenty of fruits and vegetables for overall health</li>
+                <li>Hydration with water and limiting sugary or caffeinated beverages</li>
+            </ul>
+        </div>
+    </div>
+    {% elif predict == 'Moderate_Impairment' %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Moderate Cognitive Impairment</h2>
+        </div>
+        <div class="card-body">
+            <p>Moderate cognitive impairment involves more significant problems with memory, language, thinking, and judgment than mild impairment and begins to interfere with daily life.</p>
+            <h3>Symptoms</h3>
+            <ul>
+                <li>More pronounced memory loss</li>
+                <li>Greater difficulty with language</li>
+                <li>Problems with complex tasks</li>
+                <li>Disorientation and confusion</li>
+                <li>Difficulty with daily tasks</li>
+            </ul>
+            <h3>Effects</h3>
+            <ul>
+                <li>Increased difficulty with daily activities</li>
+                <li>Potential for reduced independence</li>
+                <li>Higher risk of progressing to dementia</li>
+            </ul>
+            <h3>Causes</h3>
+            <ul>
+                <li>Age-related brain changes</li>
+                <li>Genetic factors</li>
+                <li>Medical conditions such as diabetes, hypertension, and cardiovascular diseases</li>
+                <li>Neurological disorders such as Alzheimer's disease</li>
+                <li>Lifestyle factors like poor diet, lack of exercise, and smoking</li>
+                <li>Chronic stress and sleep disturbances</li>
+            </ul>
+            <h3>Treatment</h3>
+            <ul>
+                <li>Medications to manage symptoms and slow progression</li>
+                <li>Cognitive therapies to improve mental function</li>
+                <li>Regular medical check-ups and management of underlying health conditions</li>
+                <li>Supportive care from healthcare professionals and caregivers</li>
+            </ul>
+            <h3>Prevention</h3>
+            <ul>
+                <li>Healthy diet rich in fruits, vegetables, whole grains, and lean proteins</li>
+                <li>Regular physical exercise</li>
+                <li>Mental stimulation through activities like puzzles, reading, and learning new skills</li>
+                <li>Social engagement and maintaining relationships</li>
+                <li>Adequate sleep of 7-8 hours per night</li>
+                <li>Limit alcohol consumption and quit smoking</li>
+                <li>Avoid head injuries by wearing helmets and using seat belts</li>
+            </ul>
+            <h3>Precautions</h3>
+            <ul>
+                <li>Regular monitoring of cognitive health</li>
+                <li>Early intervention strategies</li>
+                <li>Comprehensive care plans involving healthcare providers and family members</li>
+                <li>Creating a safe living environment to prevent accidents and injuries</li>
+            </ul>
+        </div>
+    </div>
+    {% elif predict == 'Very_Mild_Impairment' %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Very Mild Cognitive Impairment</h2>
+        </div>
+        <div class="card-body">
+            <p>Very mild cognitive impairment involves slight memory problems and other cognitive deficits that are noticeable but not significant enough to interfere with daily life.</p>
+            <h3>Symptoms</h3>
+            <ul>
+                <li>Occasional forgetfulness</li>
+                <li>Minor difficulties with word recall</li>
+                <li>Subtle changes in thinking skills</li>
+                <li>Small lapses in concentration</li>
+            </ul>
+            <h3>Effects</h3>
+            <ul>
+                <li>Mild impact on daily activities</li>
+                <li>Noticeable by close family or friends</li>
+                <li>May increase anxiety or frustration</li>
+            </ul>
+            <h3>Causes</h3>
+            <ul>
+                <li>Natural aging process</li>
+                <li>Genetic predisposition</li>
+                <li>Health conditions such as diabetes or hypertension</li>
+                <li>Lifestyle factors like poor diet, lack of exercise, and smoking</li>
+                <li>Chronic stress or lack of sleep</li>
+            </ul>
+            <h3>Treatment</h3>
+            <ul>
+                <li>No specific treatment required, but monitoring is recommended</li>
+                <li>Engagement in cognitive training and mental exercises</li>
+                <li>Healthy lifestyle choices and managing overall health</li>
+            </ul>
+            <h3>Prevention</h3>
+            <ul>
+                <li>Maintaining a balanced diet</li>
+                <li>Regular physical exercise</li>
+                <li>Mental stimulation activities</li>
+                <li>Social interaction</li>
+                <li>Stress management</li>
+                <li>Getting adequate sleep</li>
+            </ul>
+            <h3>Precautions</h3>
+            <ul>
+                <li>Regular health check-ups</li>
+                <li>Monitoring cognitive changes</li>
+                <li>Adopting a healthy lifestyle to delay progression</li>
+            </ul>
+        </div>
+    </div>
+    {% elif predict == 'Very_Severe_Impairment' %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Very Severe Cognitive Impairment</h2>
+        </div>
+        <div class="card-body">
+            <p>Very severe cognitive impairment involves profound deficits in memory, language, thinking, and judgment, significantly affecting daily life and independence.</p>
+            <h3>Symptoms</h3>
+            <ul>
+                <li>Severe memory loss</li>
+                <li>Inability to perform daily tasks</li>
+                <li>Significant difficulty with language and communication</li>
+                <li>Severe disorientation</li>
+                <li>Inability to recognize familiar people</li>
+                <li>Loss of independence</li>
+            </ul>
+            <h3>Effects</h3>
+            <ul>
+                <li>Significant impairment in daily functioning</li>
+                <li>Need for full-time care and assistance</li>
+                <li>High risk of progression to advanced stages of dementia</li>
+            </ul>
+            <h3>Causes</h3>
+            <ul>
+                <li>Advanced age</li>
+                <li>Genetic factors and family history of dementia</li>
+                <li>Medical conditions such as Alzheimer's disease</li>
+                <li>Significant lifestyle factors like poor diet, lack of exercise, and smoking</li>
+                <li>Chronic stress and sleep disorders</li>
+            </ul>
+            <h3>Treatment</h3>
+            <ul>
+                <li>Medications to manage symptoms and improve quality of life</li>
+                <li>Comprehensive care plans involving healthcare professionals</li>
+                <li>Supportive care from caregivers and family members</li>
+                <li>Therapies to improve quality of life and manage symptoms</li>
+            </ul>
+            <h3>Prevention</h3>
+            <ul>
+                <li>Maintaining a healthy lifestyle</li>
+                <li>Regular physical and mental exercises</li>
+                <li>Proper management of chronic conditions</li>
+                <li>Social engagement and support systems</li>
+            </ul>
+            <h3>Precautions</h3>
+            <ul>
+                <li>Safe living environment to prevent accidents</li>
+                <li>Comprehensive care and support from healthcare providers</li>
+                <li>Family and caregiver support for managing daily needs</li>
+            </ul>
+        </div>
+    </div>
+    {% elif predict == 'Severe_Impairment' %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Severe Cognitive Impairment</h2>
+        </div>
+        <div class="card-body">
+            <p>Severe cognitive impairment involves profound and debilitating deficits in memory, language, thinking, and judgment, significantly affecting the ability to perform daily tasks and maintain independence.</p>
+            <h3>Symptoms</h3>
+            <ul>
+                <li>Severe memory loss</li>
+                <li>Inability to recognize familiar people</li>
+                <li>Inability to perform daily activities</li>
+                <li>Significant disorientation and confusion</li>
+                <li>Severe difficulties with language and communication</li>
+                <li>Complete loss of independence</li>
+            </ul>
+            <h3>Effects</h3>
+            <ul>
+                <li>Complete loss of independence</li>
+                <li>High need for full-time care and assistance</li>
+                <li>Advanced progression of cognitive decline</li>
+            </ul>
+            <h3>Causes</h3>
+            <ul>
+                <li>Advanced age</li>
+                <li>Genetic factors and family history of severe dementia</li>
+                <li>Medical conditions such as advanced Alzheimer's disease</li>
+                <li>Significant lifestyle factors and poor overall health</li>
+                <li>Chronic stress and lack of proper sleep</li>
+            </ul>
+            <h3>Treatment</h3>
+            <ul>
+                <li>Advanced medical treatments and medications to manage symptoms</li>
+                <li>Comprehensive care involving multidisciplinary teams</li>
+                <li>Supportive care from family and professional caregivers</li>
+                <li>Therapeutic interventions to manage symptoms and improve quality of life</li>
+            </ul>
+            <h3>Prevention</h3>
+            <ul>
+                <li>Maintaining a healthy lifestyle and managing overall health</li>
+                <li>Regular physical and cognitive exercises</li>
+                <li>Social engagement and maintaining strong support systems</li>
+            </ul>
+            <h3>Precautions</h3>
+            <ul>
+                <li>Ensuring safety and preventing accidents in the living environment</li>
+                <li>Providing comprehensive care and support from healthcare providers</li>
+                <li>Family and caregiver support for daily needs and activities</li>
+            </ul>
+        </div>
+    </div>
+    {% elif predict == 'Very_Severe_Impairment' %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Very Severe Cognitive Impairment</h2>
+        </div>
+        <div class="card-body">
+            <p>Very severe cognitive impairment involves extreme deficits in memory, language, thinking, and judgment, leading to profound difficulties in performing even the most basic daily activities and requiring full-time care.</p>
+            <h3>Symptoms</h3>
+            <ul>
+                <li>Complete memory loss</li>
+                <li>Inability to recognize familiar faces</li>
+                <li>Incapable of performing any daily tasks</li>
+                <li>Extreme disorientation and confusion</li>
+                <li>Severe communication difficulties</li>
+                <li>Complete loss of independence</li>
+            </ul>
+            <h3>Effects</h3>
+            <ul>
+                <li>Profound impairment of all aspects of life</li>
+                <li>Continuous need for professional and full-time care</li>
+                <li>Advanced and rapid progression of cognitive decline</li>
+            </ul>
+            <h3>Causes</h3>
+            <ul>
+                <li>Advanced age-related cognitive decline</li>
+                <li>Genetic predisposition to severe forms of dementia</li>
+                <li>Severe neurological conditions such as advanced Alzheimer's disease</li>
+                <li>Chronic health issues and poor overall lifestyle</li>
+                <li>Persistent stress and sleep disorders</li>
+            </ul>
+            <h3>Treatment</h3>
+            <ul>
+                <li>Advanced medical care and interventions to manage symptoms</li>
+                <li>24/7 professional care and support</li>
+                <li>Therapies to improve quality of life and symptom management</li>
+            </ul>
+            <h3>Prevention</h3>
+            <ul>
+                <li>Maintaining the best possible overall health</li>
+                <li>Regular engagement in physical and mental exercises</li>
+                <li>Strong social support networks and care systems</li>
+            </ul>
+            <h3>Precautions</h3>
+            <ul>
+                <li>Creating a safe living environment to prevent injuries</li>
+                <li>Continuous care and monitoring from healthcare professionals</li>
+                <li>Support from family members for daily care and activities</li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endif %}
+
+</div>
+</body>
+</html>
